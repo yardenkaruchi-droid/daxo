@@ -1,0 +1,1126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#26111A" />
+<title>daxo — A future where human capability is unbounded</title>
+<meta name="description" content="daxo builds radically dexterous robotic hands. A future where human capability is unbounded." />
+
+<!--
+  ============================================================================
+  DAXO — LANDING PAGE
+  ============================================================================
+  Built strictly from the daxo brand book + DESIGN.md (ORYZO) layout system:
+
+  COLORS (brand book — slide 30/31)
+    Aubergine        #26111A   canvas, warm undertone (never true black)
+    Milky White      #F2F7FF   sole foreground — type, borders, lines
+    Its Sunset       #FF8548   hairline accent
+    The Hot Red      #FE0443   hairline accent
+    Not So Electric  #375CFF   secondary accent
+
+  TYPOGRAPHY
+    Outfit — used at every scale, 100 → 900. One family only.
+
+  LOGO
+    Handwritten "daxo" signature, embedded from /assets/.
+
+  LAYOUT
+    Full-bleed, asymmetric. No card grids. No shadows. Dashed dividers.
+    Single typeface from 10px utility to 156px display.
+    Vertical rotated edge label. Scroll prompt. Ghost pill buttons.
+
+  Real D4 / EVO product cutouts float on the aubergine canvas.
+  ============================================================================
+-->
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Outfit:wght@100;200;300;400;500;600;700;800;900&family=Caveat:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* ===========================================================
+   TOKENS
+   =========================================================== */
+:root{
+  /* Brand colors */
+  --aubergine:        #26111A;
+  --aubergine-700:    #1b0c12;
+  --aubergine-800:    #15090e;
+
+  --milky-white:      #F2F7FF;
+  --milky-white-dim:  rgba(242,247,255,0.62);
+  --milky-white-mute: rgba(242,247,255,0.38);
+
+  --sunset:           #FF8548;
+  --hot-red:          #FE0443;
+  --not-so-electric:  #375CFF;
+
+  /* Semantic */
+  --canvas:    var(--aubergine);
+  --ink:       var(--milky-white);
+  --ink-dim:   var(--milky-white-dim);
+  --ink-mute:  var(--milky-white-mute);
+  --rule:      rgba(242,247,255,0.16);
+  --rule-soft: rgba(242,247,255,0.08);
+  --rule-dash: rgba(242,247,255,0.22);
+
+  /* Type — Outfit primary, Caveat for handwritten brand signature */
+  --font: "Outfit", ui-sans-serif, system-ui, -apple-system, "Helvetica Neue", Arial, sans-serif;
+  --font-script: "Caveat", "Outfit", cursive;
+
+  /* Type scale */
+  --t-caption:   clamp(10px, 0.74vw, 12px);
+  --t-body:      clamp(14px, 1.0vw, 16px);
+  --t-sub:       clamp(16px, 1.25vw, 20px);
+  --t-h-sm:      clamp(20px, 1.7vw, 26px);
+  --t-h:         clamp(24px, 2.1vw, 34px);
+  --t-h-lg:      clamp(32px, 3.0vw, 48px);
+  --t-display:   clamp(40px, 5.2vw, 84px);
+  --t-cinematic: clamp(56px, 10vw, 168px);
+
+  /* Spacing */
+  --s-6:6px;  --s-8:8px;  --s-10:10px; --s-12:12px; --s-14:14px;
+  --s-18:18px; --s-24:24px; --s-31:31px; --s-41:41px; --s-45:45px;
+  --s-68:68px; --s-120:120px; --s-204:204px;
+
+  /* Layout */
+  --pad-x: clamp(20px, 3.4vw, 48px);
+  --section-y: clamp(80px, 11vw, 160px);
+
+  /* Radii */
+  --r-pill: 36px;
+  --r-pill-sm: 22.5px;
+}
+
+/* ===========================================================
+   RESET / BASE
+   =========================================================== */
+*,*::before,*::after{ box-sizing:border-box; }
+html{ background:var(--canvas); }
+html,body{ margin:0; padding:0; }
+body{
+  font-family:var(--font);
+  font-weight:400;
+  font-size:var(--t-body);
+  line-height:1.33;
+  color:var(--ink);
+  background-color: var(--canvas);
+  background-image:
+    /* horizontal grid line */
+    linear-gradient(rgba(242,247,255,0.085) 1px, transparent 1px),
+    /* vertical grid line */
+    linear-gradient(90deg, rgba(242,247,255,0.085) 1px, transparent 1px);
+  background-size: 80px 80px, 80px 80px;
+  background-position: 0 0, 0 0;
+  background-repeat: repeat;
+  overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+}
+img,svg,video{ display:block; max-width:100%; }
+a{ color:inherit; text-decoration:none; }
+button{ font:inherit; color:inherit; background:none; border:0; cursor:pointer; padding:0; }
+::selection{ background:var(--sunset); color:var(--aubergine); }
+html{ scroll-behavior:smooth; }
+
+/* Subtle "living texture" grain */
+body::before{
+  content:""; position:fixed; inset:0; pointer-events:none; z-index:200;
+  background-image: radial-gradient(rgba(242,247,255,0.018) 1px, transparent 1px);
+  background-size: 3px 3px;
+  mix-blend-mode: overlay; opacity:.6;
+}
+
+/* ===========================================================
+   UTILITIES
+   =========================================================== */
+.cap{
+  font-family:var(--font); font-weight:400;
+  font-size:var(--t-caption); line-height:1.2;
+  text-transform:uppercase; letter-spacing:0.08em;
+  color:var(--ink);
+}
+.cap-dim{ color:var(--ink-dim); }
+.muted{ color:var(--ink-dim); }
+
+.dashed{ border-top:1px dashed var(--rule-dash); width:100%; }
+
+.reveal{ opacity:0; transform:translateY(20px); transition:opacity .8s ease, transform .8s ease; }
+.reveal.in{ opacity:1; transform:none; }
+@media (prefers-reduced-motion: reduce){
+  .reveal{ opacity:1; transform:none; transition:none; }
+  html{ scroll-behavior:auto; }
+}
+
+/* ===========================================================
+   NAV
+   =========================================================== */
+.nav{
+  position:fixed; top:0; left:0; right:0; z-index:50;
+  display:grid; grid-template-columns:auto 1fr auto;
+  gap:var(--s-24); align-items:center;
+  padding: var(--s-18) var(--pad-x);
+  border-bottom: 1px solid var(--rule);
+  background: transparent;
+  transition: background .3s ease;
+}
+.nav.scrolled{ background: rgba(38,17,26,0.78); backdrop-filter: blur(14px) saturate(140%); -webkit-backdrop-filter:blur(14px) saturate(140%); }
+.nav .wordmark{ display:flex; align-items:center; gap:10px; }
+.nav .wordmark img{
+  height:28px; width:auto;
+}
+.nav ul{
+  list-style:none; padding:0; margin:0;
+  display:flex; gap:var(--s-24); justify-content:flex-end;
+}
+.nav ul a{
+  font-size:var(--t-caption); letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink); opacity:.9; transition:opacity .2s ease, color .2s ease;
+}
+.nav ul a:hover{ color:var(--sunset); opacity:1; }
+
+/* Ghost pill button */
+.ghost-pill{
+  display:inline-flex; align-items:center; gap:10px;
+  padding: 7.5px 16px;
+  border:1px solid var(--ink); border-radius:var(--r-pill-sm);
+  font-size:var(--t-caption); letter-spacing:0.16em; text-transform:uppercase;
+  color:var(--ink); background:transparent;
+  transition:border-color .3s ease, color .3s ease, background .3s ease;
+}
+.ghost-pill:hover{ border-color:var(--sunset); color:var(--sunset); }
+.ghost-pill.solid{
+  background:var(--milky-white); color:var(--aubergine);
+  border-color:var(--milky-white);
+}
+.ghost-pill.solid:hover{ background:var(--sunset); border-color:var(--sunset); color:var(--aubergine); }
+
+.burger{ display:none; }
+@media (max-width:840px){
+  .nav ul{ display:none; }
+  .nav .ghost-pill.cta{ display:none; }
+  .burger{
+    display:inline-flex; flex-direction:column; gap:6px;
+    width:32px; height:32px; align-items:center; justify-content:center;
+  }
+  .burger span{ width:18px; height:1px; background:var(--ink); display:block; }
+}
+
+/* ===========================================================
+   VERTICAL EDGE LABEL
+   =========================================================== */
+.edge-label{
+  position:fixed; right: 14px; top:50%;
+  transform: translateY(-50%) rotate(90deg); transform-origin: center;
+  font-size:var(--t-caption); letter-spacing:0.4em; text-transform:uppercase;
+  color:var(--ink-dim); z-index:40; pointer-events:none;
+  white-space:nowrap;
+}
+@media (max-width:720px){ .edge-label{ display:none; } }
+
+/* ===========================================================
+   SCROLL PROMPT
+   =========================================================== */
+.scroll-prompt{
+  position:fixed; left:50%; bottom:24px; transform:translateX(-50%);
+  z-index:40; display:flex; flex-direction:column; align-items:center; gap:8px;
+  color:var(--ink);
+  font-size:var(--t-caption); letter-spacing:0.32em; text-transform:uppercase;
+  transition:opacity .3s ease;
+}
+.scroll-prompt.hide{ opacity:0; pointer-events:none; }
+.scroll-prompt svg{ animation: bob 2.4s ease-in-out infinite; }
+@keyframes bob{ 0%,100%{ transform:translateY(0); } 50%{ transform:translateY(6px); } }
+
+/* ===========================================================
+   HERO
+   =========================================================== */
+.hero{
+  position:relative; min-height:100svh;
+  padding: 96px var(--pad-x) var(--s-68);
+  display:grid; grid-template-rows: auto 1fr auto;
+  overflow:hidden;
+  background: var(--canvas);
+}
+.hero-bg{
+  position:absolute; inset:0; z-index:0;
+  background:
+    radial-gradient(60% 80% at 70% 35%, rgba(255,133,72,0.35) 0%, rgba(255,133,72,0) 60%),
+    radial-gradient(80% 90% at 20% 80%, rgba(55,92,255,0.18) 0%, rgba(55,92,255,0) 60%),
+    radial-gradient(40% 50% at 40% 20%, rgba(254,4,67,0.10) 0%, rgba(254,4,67,0) 60%),
+    var(--canvas);
+}
+.hero-bg::after{
+  content:""; position:absolute; inset:0;
+  background-image:
+    linear-gradient(rgba(242,247,255,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(242,247,255,0.04) 1px, transparent 1px);
+  background-size: 80px 80px;
+  mask-image: radial-gradient(70% 60% at 50% 50%, #000 30%, transparent 100%);
+  opacity:.7;
+}
+.hero-hand{
+  position:absolute; right:-2%; top:50%; transform:translateY(-50%);
+  width: min(46.4vw, 656px); height:auto; z-index:1;
+  pointer-events:none;
+  filter: drop-shadow(-30px 40px 80px rgba(255,133,72,0.18))
+          drop-shadow(20px -20px 60px rgba(55,92,255,0.18));
+}
+.hero-hand img{ width:100%; height:auto; display:block; }
+@media (max-width:880px){
+  .hero-hand{ right:-20%; width:72vw; opacity:.45; }
+}
+
+.hero-top{
+  position:relative; z-index:2;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.hero-top .badge{ display:inline-flex; align-items:center; gap:10px; }
+.hero-top .badge .dot{ width:6px; height:6px; border-radius:50%; background:var(--sunset); }
+
+.hero-mid{ position:relative; z-index:2; display:flex; align-items:flex-end; padding-block: var(--s-45); }
+.hero-mid h1{
+  font-family:var(--font); font-weight:400;
+  font-size: var(--t-cinematic); line-height:.86; letter-spacing:-0.035em;
+  margin:0; max-width: 14ch; color:var(--ink);
+  text-wrap: balance;
+}
+.hero-mid h1 .em{ font-style:italic; font-weight:500; }
+.hero-mid h1 .ink-accent{ color: var(--sunset); }
+
+.hero-bottom{
+  position:relative; z-index:2;
+  display:grid; grid-template-columns: 1.4fr 1fr; gap: var(--s-45);
+  align-items:end;
+  padding-top: var(--s-31);
+  border-top:1px dashed var(--rule-dash);
+}
+.hero-bottom .copy{ max-width: 46ch; color: var(--ink); font-size: var(--t-sub); line-height:1.35; }
+.hero-bottom .copy p{ margin:0; }
+.hero-bottom .copy .label{ display:block; margin-bottom: var(--s-14); }
+.hero-bottom .ctas{ display:flex; gap: var(--s-12); justify-content:flex-end; flex-wrap:wrap; }
+
+@media (max-width:880px){
+  .hero-bottom{ grid-template-columns: 1fr; }
+  .hero-bottom .ctas{ justify-content:flex-start; }
+}
+
+/* ===========================================================
+   PHRASE BAND
+   =========================================================== */
+.phrase{
+  border-top:1px dashed var(--rule-dash);
+  border-bottom:1px dashed var(--rule-dash);
+  padding: var(--s-18) 0; overflow:hidden;
+}
+.phrase .track{
+  display:flex; gap: var(--s-68); white-space:nowrap;
+  animation: marquee 60s linear infinite;
+}
+.phrase .track span{
+  font-size: var(--t-sub); font-weight:400; letter-spacing:-0.01em;
+  color:var(--ink); display:inline-flex; align-items:center; gap: var(--s-68);
+}
+.phrase .track span::after{
+  content:""; width:8px; height:8px; border-radius:50%; background:var(--sunset);
+}
+@keyframes marquee{ to { transform:translateX(-50%); } }
+
+/* ===========================================================
+   STORY
+   =========================================================== */
+.story{ padding: var(--section-y) var(--pad-x); position:relative; }
+.story + .story{ border-top:1px dashed var(--rule-dash); }
+
+.story-row{
+  display:grid; grid-template-columns: 1.1fr 1fr; gap: var(--s-68);
+  align-items:end;
+}
+.story-row.flip{ grid-template-columns: 1fr 1.1fr; }
+.story-row.flip .col-text{ order:2; }
+
+.story h2{
+  margin:0; font-weight:400; font-size: var(--t-display); line-height:.92; letter-spacing:-0.03em;
+  color:var(--ink); max-width: 14ch; text-wrap:balance;
+}
+.story h2 .em{ font-style:italic; font-weight:500; }
+.story h2 .accent{ color:var(--sunset); font-style:italic; font-weight:500; }
+.story h2 .ghost{ color:var(--ink-mute); }
+
+.story p.lede{
+  margin: var(--s-24) 0 0; color: var(--ink-dim);
+  font-size: var(--t-sub); line-height:1.4; max-width: 42ch;
+}
+.story .meta{ margin-top: var(--s-24); }
+
+/* Image well — floating cutout, no white sides */
+.well{
+  position:relative; aspect-ratio: 4 / 5; overflow:hidden;
+  background: transparent;
+}
+.well.wide{ aspect-ratio: 16 / 10; }
+.well.tall{ aspect-ratio: 3 / 4; }
+.well > img.cover{
+  position:absolute; inset:0; width:100%; height:100%; object-fit:contain;
+  display:block; z-index:2;
+}
+.well .glow{ position:absolute; inset:0; z-index:1;
+  mask-image: radial-gradient(60% 60% at 50% 55%, #000 0%, transparent 80%);
+  -webkit-mask-image: radial-gradient(60% 60% at 50% 55%, #000 0%, transparent 80%);
+}
+/* Hide meta + corner overlays so nothing sits on the photo */
+.well .meta, .well .corner{ display: none; }
+
+/* Solid variant — photo zooms in to fill, white edges cropped away */
+.well.solid-white{ background: var(--canvas); overflow: hidden; }
+.well.solid-white > img.cover{
+  object-fit: cover;
+  object-position: center;
+  /* Zoom in 25% so the photos' baked-in white margins get cropped off the visible frame */
+  transform: scale(1.25);
+  transform-origin: center;
+}
+.well.solid-white .glow{ display: none; }
+.well .meta{
+  position:absolute; left:14px; right:14px; bottom:14px; z-index:3;
+  display:flex; justify-content:space-between; align-items:center;
+  font-size: var(--t-caption); letter-spacing:0.18em; text-transform:uppercase; color:var(--ink);
+  text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+}
+.well .meta .dot{ width:6px; height:6px; border-radius:50%; background:var(--sunset); display:inline-block; margin-right:8px; }
+.well .corner{
+  position:absolute; width:18px; height:18px; border:1px solid var(--ink); opacity:.85; z-index:3;
+}
+.well .corner.tl{ top:14px; left:14px; border-right:0; border-bottom:0; }
+.well .corner.tr{ top:14px; right:14px; border-left:0; border-bottom:0; }
+.well .corner.bl{ bottom:14px; left:14px; border-right:0; border-top:0; }
+.well .corner.br{ bottom:14px; right:14px; border-left:0; border-top:0; }
+
+@media (max-width:880px){
+  .story-row, .story-row.flip{ grid-template-columns: 1fr; gap: var(--s-31); }
+  .story-row.flip .col-text{ order:0; }
+}
+
+/* ===========================================================
+   QUOTE PANEL
+   =========================================================== */
+.quote{
+  padding: clamp(120px, 18vw, 240px) var(--pad-x);
+  border-top:1px dashed var(--rule-dash);
+  position:relative; overflow:hidden;
+}
+.quote .lines{
+  display:flex; flex-direction:column; gap: var(--s-14); max-width: 100%;
+}
+.quote h2{
+  margin:0; font-weight:400;
+  font-size: clamp(40px, 6.5vw, 108px);
+  line-height:.95; letter-spacing:-0.03em;
+}
+.quote h2 .line{ display:block; white-space:nowrap; }
+.quote h2 .em{ font-style:italic; font-weight:500; }
+.quote h2 .accent{ color:var(--sunset); font-style:italic; font-weight:500; }
+
+.quote .signature{
+  position:absolute; right: var(--pad-x); bottom: var(--pad-x);
+  display:flex; flex-direction:column; align-items:flex-end; gap: 8px; max-width: 360px;
+}
+.quote .signature img{ height: 56px; width:auto; opacity:.95; }
+@media (max-width:880px){ .quote .signature{ position:static; align-items:flex-start; margin-top: var(--s-45); } }
+
+/* ===========================================================
+   PRODUCT SHOWCASE
+   =========================================================== */
+.product{
+  position:relative; padding: var(--section-y) var(--pad-x);
+  border-top:1px dashed var(--rule-dash);
+}
+.product .head{
+  display:grid; grid-template-columns: auto 1fr; gap: var(--s-45); align-items:end;
+  margin-bottom: var(--s-68);
+}
+.product .head h2{
+  margin:0; font-weight:400; font-size: var(--t-display); line-height:.9; letter-spacing:-0.03em;
+  max-width: 18ch; text-wrap:balance;
+}
+.product .head h2 .em{ font-style:italic; font-weight:500; }
+
+.product-rows{ display:flex; flex-direction:column; gap: clamp(80px, 12vw, 180px); }
+.product-row{
+  display:grid; grid-template-columns: 1fr 1fr; gap: var(--s-68); align-items:start;
+}
+.product-row.flip .col-media{ order:-1; }
+.product-row .col-text{ position:sticky; top: 120px; }
+.product-row .col-text .num{ display:block; margin-bottom: var(--s-18); }
+.product-row .col-text h3{
+  margin:0; font-weight:400; font-size: var(--t-h-lg); line-height:.96; letter-spacing:-0.025em;
+  text-wrap:balance;
+}
+.product-row .col-text h3 .em{ font-style:italic; font-weight:500; }
+.product-row .col-text p{
+  margin: var(--s-18) 0 0; color: var(--ink-dim);
+  font-size: var(--t-sub); line-height:1.42; max-width: 42ch;
+}
+.product-row .specs{
+  list-style:none; padding:0; margin: var(--s-31) 0 0;
+  border-top:1px dashed var(--rule-dash);
+}
+.product-row .specs li{
+  display:flex; justify-content:space-between; gap: var(--s-18);
+  padding: var(--s-14) 0; border-bottom:1px dashed var(--rule-dash);
+  font-size: var(--t-body);
+}
+.product-row .specs li span:last-child{
+  font-size: var(--t-caption); letter-spacing:0.18em; text-transform:uppercase;
+  color:var(--ink); align-self:center;
+}
+@media (max-width:880px){
+  .product-row, .product-row.flip{ grid-template-columns: 1fr; gap: var(--s-31); }
+  .product-row.flip .col-media{ order:0; }
+  .product-row .col-text{ position:static; }
+}
+
+/* ===========================================================
+   COLORWAYS
+   =========================================================== */
+.colorways{
+  border-top:1px dashed var(--rule-dash);
+  padding: var(--section-y) 0;
+}
+.colorways .head{
+  display:grid; grid-template-columns: auto 1fr; gap: var(--s-45); align-items:end;
+  margin-bottom: var(--s-45); padding: 0 var(--pad-x);
+}
+.colorways .head h2{
+  margin:0; font-weight:400; font-size: var(--t-display); line-height:.9; letter-spacing:-0.03em;
+  max-width: 22ch; text-wrap:balance;
+}
+.colorways .head h2 .em{ font-style:italic; font-weight:500; }
+.colorways .strip{
+  position: relative; overflow: hidden;
+  width: 100%; aspect-ratio: 16 / 5;
+  background: var(--canvas);
+  border-top:1px solid var(--rule); border-bottom:1px solid var(--rule);
+}
+.colorways .strip img{
+  width: 100%; height: 100%; object-fit: cover; object-position: center bottom;
+  display: block;
+  transform: scale(1.15); transform-origin: center bottom;
+}
+@media (max-width:880px){
+  .colorways .strip{ aspect-ratio: 4 / 5; }
+}
+
+/* ===========================================================
+   TECH
+   =========================================================== */
+.tech{ padding: var(--section-y) var(--pad-x); border-top:1px dashed var(--rule-dash); }
+.tech .head{ margin-bottom: var(--s-68); display:grid; grid-template-columns: auto 1fr; gap: var(--s-45); align-items:end; }
+.tech .head h2{
+  margin:0; font-weight:400; font-size: var(--t-display); line-height:.9; letter-spacing:-0.03em;
+  max-width: 22ch; text-wrap:balance;
+}
+.tech .head h2 .em{ font-style:italic; font-weight:500; }
+
+.tech-list{ display:flex; flex-direction:column; }
+.tech-line{
+  display:grid; grid-template-columns: 80px 1fr 2fr auto;
+  gap: var(--s-31); align-items:start;
+  padding: var(--s-41) 0; border-top:1px solid var(--rule);
+  transition: background .3s ease;
+}
+.tech-line:last-child{ border-bottom:1px solid var(--rule); }
+.tech-line:hover{ background: linear-gradient(90deg, rgba(255,133,72,0.04), transparent 70%); }
+.tech-line .num{
+  font-size: var(--t-caption); letter-spacing:0.22em; text-transform:uppercase; color:var(--ink-dim);
+  padding-top:8px;
+}
+.tech-line h4{
+  margin:0; font-weight:400; font-size: var(--t-h); line-height:1.0; letter-spacing:-0.02em;
+  text-wrap:balance;
+}
+.tech-line h4 .em{ font-style:italic; font-weight:500; color:var(--sunset); }
+.tech-line p{ margin:0; color:var(--ink-dim); font-size: var(--t-body); line-height:1.5; max-width: 56ch; }
+.tech-line .pill{
+  font-size: var(--t-caption); letter-spacing:0.18em; text-transform:uppercase; color:var(--ink);
+  border:1px solid var(--ink); border-radius: var(--r-pill-sm);
+  padding: 6px 14px; align-self:start; white-space:nowrap;
+}
+@media (max-width:880px){
+  .tech-line{ grid-template-columns: 1fr; gap: var(--s-12); padding: var(--s-31) 0; }
+  .tech-line .pill{ align-self:start; }
+}
+
+/* ===========================================================
+   USE CASES
+   =========================================================== */
+.cases{ padding: var(--section-y) var(--pad-x); border-top:1px dashed var(--rule-dash); }
+.cases .head{ margin-bottom: var(--s-68); display:grid; grid-template-columns: auto 1fr; gap: var(--s-45); align-items:end; }
+.cases .head h2{
+  margin:0; font-weight:400; font-size: var(--t-display); line-height:.9; letter-spacing:-0.03em;
+  max-width: 18ch; text-wrap:balance;
+}
+.cases .head h2 .em{ font-style:italic; font-weight:500; }
+
+.case{
+  display:grid; grid-template-columns: 160px 1.4fr 1fr; gap: var(--s-45);
+  padding: var(--s-45) 0;
+  border-top:1px solid var(--rule);
+  align-items:end;
+  transition: background .3s ease;
+}
+.case:last-child{ border-bottom:1px solid var(--rule); }
+.case:hover{ background: linear-gradient(90deg, transparent 0%, rgba(255,133,72,0.04) 100%); }
+.case .label{ color:var(--ink-dim); }
+.case h4{
+  margin:0; font-weight:400; font-size: var(--t-h-lg); line-height:.96; letter-spacing:-0.022em;
+  text-wrap:balance;
+}
+.case h4 .em{ font-style:italic; font-weight:500; }
+.case p{ margin:0; color:var(--ink-dim); font-size: var(--t-body); line-height:1.5; }
+@media (max-width:880px){
+  .case{ grid-template-columns: 1fr; gap: var(--s-12); padding: var(--s-31) 0; }
+}
+
+/* ===========================================================
+   DEMO
+   =========================================================== */
+.demo{ padding: var(--section-y) var(--pad-x); border-top:1px dashed var(--rule-dash); }
+.demo .head{ display:grid; grid-template-columns: auto 1fr; gap: var(--s-45); align-items:end; margin-bottom: var(--s-45); }
+.demo .head h2{
+  margin:0; font-weight:400; font-size: var(--t-display); line-height:.9; letter-spacing:-0.03em;
+  max-width: 22ch; text-wrap:balance;
+}
+.demo .head h2 .em{ font-style:italic; font-weight:500; }
+
+.demo-frame{
+  position:relative; aspect-ratio:16/9; overflow:hidden;
+  background:
+    radial-gradient(120% 80% at 50% 30%, rgba(255,133,72,0.18) 0%, rgba(255,133,72,0) 60%),
+    radial-gradient(80% 60% at 30% 80%, rgba(55,92,255,0.14) 0%, rgba(55,92,255,0) 60%),
+    linear-gradient(180deg, #1f0d16 0%, #1a0a12 100%);
+}
+.demo-frame{ overflow: hidden; }
+.demo-frame img.poster{
+  position:absolute; inset:0; width:100%; height:100%;
+  object-fit: cover; object-position: center bottom; z-index:1;
+  transform: scale(1.2); transform-origin: center bottom;
+}
+.demo-frame .frame-meta{
+  position:absolute; left:18px; right:18px; top:18px; z-index:3;
+  display:flex; justify-content:space-between; color:var(--ink);
+  font-size: var(--t-caption); letter-spacing:0.18em; text-transform:uppercase;
+}
+.demo-frame .frame-foot{
+  position:absolute; left:18px; right:18px; bottom:18px; z-index:3;
+  display:flex; justify-content:space-between; color:var(--ink);
+  font-size: var(--t-caption); letter-spacing:0.18em; text-transform:uppercase;
+}
+.demo-frame .play{
+  position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); z-index:3;
+  width:120px; height:120px; border-radius:50%;
+  border:1px solid var(--ink); display:flex; align-items:center; justify-content:center;
+  background: transparent; transition:transform .3s ease, border-color .3s ease, background .3s ease;
+}
+.demo-frame .play:hover{ transform:translate(-50%,-50%) scale(1.05); border-color:var(--sunset); background: rgba(255,133,72,0.12); }
+.demo-frame .play .triangle{
+  width:0; height:0; margin-left:6px;
+  border-left: 18px solid var(--ink);
+  border-top: 11px solid transparent;
+  border-bottom: 11px solid transparent;
+}
+.demo-frame .play:hover .triangle{ border-left-color:var(--sunset); }
+
+.demo-meta{
+  display:grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-31);
+  padding-top: var(--s-31);
+  border-top:1px dashed var(--rule-dash); margin-top: var(--s-24);
+}
+.demo-meta .cap{ display:block; margin-bottom: 8px; color:var(--ink-dim); }
+.demo-meta p{ margin:0; color:var(--ink); font-size: var(--t-body); }
+@media (max-width:880px){ .demo-meta{ grid-template-columns: repeat(2,1fr); } }
+
+/* ===========================================================
+   END CTA
+   =========================================================== */
+.end{
+  padding: clamp(140px, 18vw, 240px) var(--pad-x);
+  border-top:1px dashed var(--rule-dash); position:relative; overflow:hidden;
+}
+.end::before{
+  content:""; position:absolute; inset:0; z-index:0; pointer-events:none;
+  background:
+    radial-gradient(50% 60% at 80% 30%, rgba(255,133,72,0.16) 0%, transparent 60%),
+    radial-gradient(40% 50% at 10% 80%, rgba(254,4,67,0.10) 0%, transparent 60%);
+}
+.end-inner{ position:relative; z-index:1; }
+.end h2{
+  margin:0; font-weight:400; font-size: var(--t-cinematic); line-height:.88; letter-spacing:-0.035em;
+  max-width: 18ch; text-wrap:balance;
+}
+.end h2 .em{ font-style:italic; font-weight:500; }
+.end h2 .accent{ color:var(--sunset); font-style:italic; font-weight:500; }
+
+.end .row{
+  display:flex; justify-content:space-between; align-items:flex-end; gap: var(--s-31);
+  margin-top: var(--s-45); flex-wrap:wrap;
+}
+.end p{ margin:0; color:var(--ink-dim); max-width: 36ch; font-size: var(--t-sub); }
+.end .ctas{ display:flex; gap: var(--s-12); flex-wrap:wrap; }
+
+/* ===========================================================
+   FOOTER
+   =========================================================== */
+footer{ padding: var(--s-68) var(--pad-x) var(--s-31); border-top: 1px dashed var(--rule-dash); }
+.foot-top{
+  display:grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: var(--s-31);
+  padding-bottom: var(--s-45); border-bottom:1px dashed var(--rule-dash);
+}
+.foot-top h6{
+  margin: 0 0 var(--s-14); font-weight:400;
+  font-size: var(--t-caption); letter-spacing:0.22em; text-transform:uppercase;
+  color: var(--ink-dim);
+}
+.foot-top ul{ list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap: 8px; }
+.foot-top a{ color:var(--ink); font-size:var(--t-body); }
+.foot-top a:hover{ color:var(--sunset); }
+.foot-top .brand p{ color:var(--ink-dim); max-width: 36ch; margin: 0; }
+.foot-top .brand img{ height:36px; width:auto; margin-bottom: var(--s-14); }
+
+.giant-mark{
+  margin: var(--s-68) 0 var(--s-24);
+  display:flex; justify-content:center;
+}
+.giant-mark img{ width: 92%; height:auto; max-width: 1600px; opacity:.95; }
+
+.foot-bot{
+  display:flex; justify-content:space-between; align-items:center;
+  padding-top: var(--s-18);
+  font-size: var(--t-caption); letter-spacing:0.16em; text-transform:uppercase; color: var(--ink-dim);
+}
+@media (max-width:880px){
+  .foot-top{ grid-template-columns: 1fr 1fr; }
+}
+@media (max-width:560px){
+  .foot-top{ grid-template-columns: 1fr; }
+  .foot-bot{ flex-direction:column; gap: var(--s-12); align-items:flex-start; }
+}
+
+/* ===========================================================
+   SECTION NUM
+   =========================================================== */
+.section-num{
+  display:flex; align-items:center; gap: var(--s-12);
+}
+.section-num .marker{ width:8px; height:8px; border-radius:50%; background:var(--sunset); }
+.section-num .cap{ color:var(--ink); }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<header class="nav" id="nav">
+  <a href="#top" class="wordmark" aria-label="daxo home">
+    <img src="assets/daxo-logo-light.png" alt="daxo" />
+  </a>
+  <nav>
+    <ul>
+      <li><a href="#story">Story</a></li>
+      <li><a href="#product">Product</a></li>
+      <li><a href="#tech">Technology</a></li>
+      <li><a href="#cases">Use cases</a></li>
+      <li><a href="#demo">Demo</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </nav>
+  <a href="#contact" class="ghost-pill cta">Request demo</a>
+  <button class="burger" aria-label="Menu"><span></span><span></span></button>
+</header>
+
+
+<div class="scroll-prompt" id="scrollPrompt">
+  <span>Scroll to continue</span>
+  <svg width="14" height="22" viewBox="0 0 14 22" fill="none" aria-hidden="true">
+    <path d="M7 1 V19 M1 13 l6 6 l6 -6" stroke="currentColor" stroke-width="1.2"/>
+  </svg>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-bg" aria-hidden="true"></div>
+
+  <div class="hero-hand" aria-hidden="true">
+    <img src="assets/hand-milky-arm.png" alt="" />
+  </div>
+
+  <div class="hero-top">
+    <span class="cap badge"><span class="dot" aria-hidden="true"></span>DAXO · 26.06.2026</span>
+    <span class="cap muted">TLV · SF · ZURICH</span>
+  </div>
+
+  <div class="hero-mid">
+    <h1>
+      A future where<br>
+      <span class="em">human capability</span><br>
+      is <span class="ink-accent">unbounded.</span>
+    </h1>
+  </div>
+
+  <div class="hero-bottom">
+    <div class="copy">
+      <span class="cap cap-dim label">— A note on dexterity</span>
+      <p>
+        daxo builds ultra-redundant, radically dexterous robotic hands
+        for the high-mix, high-precision tasks that traditional
+        automation cannot reach.
+      </p>
+    </div>
+    <div class="ctas">
+      <a href="#demo" class="ghost-pill solid">
+        Watch the demo
+        <svg width="12" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true">
+          <path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/>
+        </svg>
+      </a>
+      <a href="#tech" class="ghost-pill">
+        Explore the technology
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- PHRASE BAND -->
+<div class="phrase" aria-hidden="true">
+  <div class="track">
+    <span>radical dexterity</span>
+    <span>ultra-redundant actuation</span>
+    <span>tendon-driven manipulation</span>
+    <span>built for physical AI</span>
+    <span>the long tail of automation</span>
+    <span>radical dexterity</span>
+    <span>radical dexterity</span>
+    <span>ultra-redundant actuation</span>
+    <span>tendon-driven manipulation</span>
+    <span>built for physical AI</span>
+    <span>the long tail of automation</span>
+    <span>radical dexterity</span>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="story" id="story">
+  <div class="story-row">
+    <div class="col-text">
+      <div class="section-num"><span class="marker"></span><span class="cap">01 — The human hand</span></div>
+      <h2 style="margin-top: var(--s-31)">
+        It is our most <span class="em">sophisticated</span> tool.
+        <span class="ghost">We're so used to it, we take it for granted.</span>
+      </h2>
+      <p class="lede">
+        Every physical thing humans have made bears the signature of the
+        dexterous hand. It forged our world, expressed our emotions,
+        formed beauty, penned the future.
+      </p>
+    </div>
+    <div class="col-media">
+      <div class="well tall solid-white">
+        <img class="cover" src="assets/hand-cuff-electric.jpg" alt=""/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story">
+  <div class="story-row flip">
+    <div class="col-text">
+      <div class="section-num"><span class="marker"></span><span class="cap">02 — They forged</span></div>
+      <h2 style="margin-top: var(--s-31)">
+        With them, we <span class="accent">shaped</span> the past.
+      </h2>
+      <p class="lede">
+        Cities. Cathedrals. Circuits. Vaccines. Spacecraft. Symphonies.
+        Almost everything we call progress, the hand made.
+      </p>
+    </div>
+    <div class="col-media">
+      <div class="well wide solid-white">
+        <img class="cover" src="assets/arm-system-floor.jpg" alt=""/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section class="quote">
+  <div class="lines">
+    <h2>
+      <span class="line">With them, <span class="em">we will</span></span>
+      <span class="line"><span class="accent">shape</span> the future.</span>
+    </h2>
+  </div>
+
+  <div class="signature">
+    <img src="assets/daxo-logo-light.png" alt="daxo signature" />
+    <span class="cap cap-dim">— The maker's hand</span>
+  </div>
+</section>
+
+<!-- PRODUCT -->
+<section class="product" id="product">
+  <div class="head">
+    <div class="section-num"><span class="marker"></span><span class="cap">03 — Product</span></div>
+    <h2>An <span class="em">instrument</span> for physical intelligence.</h2>
+  </div>
+
+  <div class="product-rows">
+
+    <article class="product-row">
+      <div class="col-text">
+        <span class="cap cap-dim num">d4 · evo · 01</span>
+        <h3>Engineered <span class="em">past</span> the human form.</h3>
+        <p>
+          More independent joints than a human hand, with redundant
+          tendons on every finger. A geometry not constrained by anatomy
+          — tuned for what real factories and labs need to do.
+        </p>
+        <ul class="specs">
+          <li><span>Active degrees of freedom</span><span>24+ DoF</span></li>
+          <li><span>Redundant tendons / finger</span><span>3×</span></li>
+          <li><span>Closed-loop control rate</span><span>1 kHz</span></li>
+          <li><span>Mean time before service</span><span>10,000 h</span></li>
+        </ul>
+      </div>
+      <div class="col-media">
+        <div class="well tall solid-white">
+          <img class="cover" src="assets/arm-system-white.jpg" alt=""/>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-row flip">
+      <div class="col-text">
+        <span class="cap cap-dim num">d4 · evo · 02</span>
+        <h3>Soft tendons. <span class="em">Hard</span> precision.</h3>
+        <p>
+          A tendon-driven architecture transfers torque without the
+          rigidity of conventional grippers — human-scale compliance,
+          sub-millimeter placement.
+        </p>
+        <ul class="specs">
+          <li><span>Fingertip repeatability</span><span>±0.4 mm</span></li>
+          <li><span>Sustained payload</span><span>3 kg</span></li>
+          <li><span>Grasp force range</span><span>0.2 – 60 N</span></li>
+          <li><span>Compliance modes</span><span>Variable</span></li>
+        </ul>
+      </div>
+      <div class="col-media">
+        <div class="well tall solid-white">
+          <img class="cover" src="assets/hand-sunset-nature.jpg" alt=""/>
+        </div>
+      </div>
+    </article>
+
+    <article class="product-row">
+      <div class="col-text">
+        <span class="cap cap-dim num">d4 · evo · 03</span>
+        <h3>One platform. <span class="em">Many</span> tasks.</h3>
+        <p>
+          A modular fingertip and sensor stack covers a wider task
+          envelope than a fleet of single-purpose tools. Swap end-effects
+          in seconds. Train once, deploy across lines.
+        </p>
+        <ul class="specs">
+          <li><span>Modular tip variants</span><span>6+ at launch</span></li>
+          <li><span>Tactile channels / finger</span><span>32</span></li>
+          <li><span>Interfaces</span><span>EtherCAT · ROS 2</span></li>
+          <li><span>Mount</span><span>ISO 9409-1-50-4-M6</span></li>
+        </ul>
+      </div>
+      <div class="col-media">
+        <div class="well tall solid-white">
+          <img class="cover" src="assets/arm-system-floor.jpg" alt=""/>
+        </div>
+      </div>
+    </article>
+
+  </div>
+</section>
+
+
+<!-- TECH -->
+<section class="tech" id="tech">
+  <div class="head">
+    <div class="section-num"><span class="marker"></span><span class="cap">04 — Technology</span></div>
+    <h2>Four ideas, <span class="em">one</span> hand.</h2>
+  </div>
+
+  <div class="tech-list">
+    <div class="tech-line">
+      <span class="num">↳ 01</span>
+      <h4>Ultra-high <span class="em">degrees of freedom</span>.</h4>
+      <p>More independent joints than a human hand. Movements humans can't reach become routine.</p>
+      <span class="pill">24+ DoF</span>
+    </div>
+    <div class="tech-line">
+      <span class="num">↳ 02</span>
+      <h4>Redundant <span class="em">muscle array</span>.</h4>
+      <p>Multiple actuators per axis remove single points of failure and absorb wear over time.</p>
+      <span class="pill">3× redundancy</span>
+    </div>
+    <div class="tech-line">
+      <span class="num">↳ 03</span>
+      <h4>AI-ready <span class="em">control</span>.</h4>
+      <p>Built from day one for imitation and reinforcement learning, with a clean interface for policy iteration.</p>
+      <span class="pill">IL · RL</span>
+    </div>
+    <div class="tech-line">
+      <span class="num">↳ 04</span>
+      <h4>Reliability <span class="em">by architecture</span>.</h4>
+      <p>Designed for production duty cycles. Failures are isolated, recovered, and never propagate.</p>
+      <span class="pill">10,000 h MTBF</span>
+    </div>
+  </div>
+</section>
+
+<!-- USE CASES -->
+<section class="cases" id="cases">
+  <div class="head">
+    <div class="section-num"><span class="marker"></span><span class="cap">05 — Use cases</span></div>
+    <h2>Where dexterity <span class="em">pays back</span>.</h2>
+  </div>
+
+  <div class="case">
+    <span class="cap label">↳ Manufacturing</span>
+    <h4>High-mix assembly <span class="em">without re-tooling</span>.</h4>
+    <p>Replace fleets of single-purpose end-effectors with a single hand that adapts across SKUs, geometries and tolerances.</p>
+  </div>
+
+  <div class="case">
+    <span class="cap label">↳ Logistics</span>
+    <h4>Mixed-SKU <span class="em">picking</span>.</h4>
+    <p>Pick deformable, fragile, or irregular items at human-comparable throughput.</p>
+  </div>
+
+  <div class="case">
+    <span class="cap label">↳ Lab · Bio</span>
+    <h4>Delicate <span class="em">sample handling</span>.</h4>
+    <p>Vials, tubes and instruments — no jigs, no breakages, no operator fatigue.</p>
+  </div>
+
+  <div class="case">
+    <span class="cap label">↳ Inspection</span>
+    <h4>Tactile QA <span class="em">at scale</span>.</h4>
+    <p>32 tactile channels per finger turn the hand into a measurement instrument.</p>
+  </div>
+
+  <div class="case">
+    <span class="cap label">↳ Electronics</span>
+    <h4>Fine-component <span class="em">placement</span>.</h4>
+    <p>Sub-millimeter placement across thousands of small, varied parts.</p>
+  </div>
+</section>
+
+
+<!-- END CTA -->
+<section class="end" id="contact">
+  <div class="end-inner">
+    <span class="cap cap-dim">07 — Next</span>
+    <h2 style="margin-top: var(--s-31)">
+      Ready to <span class="em">automate</span> the tasks robots still
+      <span class="accent">can't</span> reach?
+    </h2>
+    <div class="row">
+      <p>
+        Talk to our team about pilots, partnerships, and research
+        collaborations. We deploy with selected partners in 2026.
+      </p>
+      <div class="ctas">
+        <a href="mailto:hello@daxo-robotics.com" class="ghost-pill solid">
+          Contact daxo
+          <svg width="12" height="10" viewBox="0 0 14 10" fill="none" aria-hidden="true">
+            <path d="M1 5h12M9 1l4 4-4 4" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/>
+          </svg>
+        </a>
+        <a href="#demo" class="ghost-pill">Request a demo</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <div class="foot-top">
+    <div class="brand">
+      <img src="assets/daxo-logo-light.png" alt="daxo" />
+      <p>Radically dexterous robotic hands for the long tail of automation. Tel Aviv · San Francisco.</p>
+    </div>
+    <div>
+      <h6>Product</h6>
+      <ul>
+        <li><a href="#product">D4 / Evo</a></li>
+        <li><a href="#tech">Technology</a></li>
+        <li><a href="#cases">Use cases</a></li>
+        <li><a href="#demo">Demo</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Company</h6>
+      <ul>
+        <li><a href="#">About</a></li>
+        <li><a href="#">Careers</a></li>
+        <li><a href="#">News</a></li>
+        <li><a href="#">Press kit</a></li>
+      </ul>
+    </div>
+    <div>
+      <h6>Contact</h6>
+      <ul>
+        <li><a href="mailto:hello@daxo-robotics.com">hello@daxo-robotics.com</a></li>
+        <li><a href="#">Partnerships</a></li>
+        <li><a href="#">LinkedIn</a></li>
+        <li><a href="#">X / Twitter</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="giant-mark" aria-hidden="true">
+    <img src="assets/daxo-logo-light.png" alt="daxo" />
+  </div>
+
+  <div class="foot-bot">
+    <span>© 2026 daxo robotics ltd.</span>
+    <span>A future where human capability is unbounded.</span>
+  </div>
+</footer>
+
+<script>
+(function(){
+  const nav = document.getElementById('nav');
+  const sp  = document.getElementById('scrollPrompt');
+  const onScroll = () => {
+    const y = window.scrollY;
+    nav.classList.toggle('scrolled', y > 24);
+    sp.classList.toggle('hide', y > 120);
+  };
+  window.addEventListener('scroll', onScroll, { passive:true });
+  onScroll();
+
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('in');
+          io.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.story, .product-row, .tech-line, .case, .demo-frame, .end-inner, .quote, .colorways').forEach(el => {
+      el.classList.add('reveal'); io.observe(el);
+    });
+  }
+})();
+</script>
+</body>
+</html>
